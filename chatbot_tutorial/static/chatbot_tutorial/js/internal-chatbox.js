@@ -39,20 +39,60 @@ function processAndDisplayChatMessage(message){
 }
 
 
-function sendTextMessage() {
-    if ($('#messageToSend').text() == "") {
-        return
-    }
+// function sendTextMessage() {
+//     if ($('#messageToSend').text() == "") {
+//         return
+//     }
 
-    message = {}
-    message.text = $('#messageToSend').html().replace("</div>", "").replace("<div>", "\n").replace("<br>", "\n");
-    message.command= 'send'
-    message.timestamp = new Date();
+//     message = {}
+//     message.text = $('#messageToSend').html().replace("</div>", "").replace("<div>", "\n").replace("<br>", "\n");
+//     message.command= 'send'
+//     message.timestamp = new Date();
     
     
-    $('#messageToSend').text('');
+//     $('#messageToSend').text('');
+// 	chatsock.send(JSON.stringify(message));
+// 	$("#message").val('').focus();
+//     return false;   
+// }
+
+function sendTextMessage() {
+	if ($('#messageToSend').text() == "") {
+	  return
+	}
+  
+	message = {}
+	message.text = $('#messageToSend').html().replace("</div>", "").replace("<div>", "\n").replace("<br>", "\n");
+	message.command = 'send'
+	message.timestamp = new Date();
+  
+	$('#messageToSend').text('');
 	chatsock.send(JSON.stringify(message));
 	$("#message").val('').focus();
-    return false;   
-}
+	return false;
+  }
+
+  function sendJoke(type) {
+	var joke;
+	switch (type) {
+	  case "stupid":
+		joke = "stupid";
+		break;
+	  case "fat":
+		joke = "fat";
+		break;
+	  case "dumb":
+		joke = "dumb";
+		break;
+	  default:
+		joke = "Oops, something went wrong!";
+	}
+	message = {}
+	message.text = joke;
+	message.command = 'send'
+	message.timestamp = new Date();
+  
+	chatsock.send(JSON.stringify(message));
+	return false;
+  }
 		

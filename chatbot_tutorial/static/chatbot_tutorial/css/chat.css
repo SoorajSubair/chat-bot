@@ -1,7 +1,9 @@
 /*I am not very proud of this CSS. Mostly borrowed it from a friends project and cut out all the parts that were unnecessary.*/
+
 html,
 body {
     height: 100%;
+    
 }
 #wrap {
     min-height: 80%;
@@ -88,7 +90,10 @@ body {
     left:0;
     top:40px;
     overflow-y:auto;
+    background-image: url('/static/chatbot_tutorial/images/peakpx.jpg');
+    background-size: cover;
 }
+  
 #sub-body-container{
     max-width: 50em;
     margin:0 auto;

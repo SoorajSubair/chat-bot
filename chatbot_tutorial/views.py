@@ -6,6 +6,8 @@ import random
 from django.utils.decorators import method_decorator
 from django.http.response import HttpResponse
 from django.shortcuts import render
+from django.http import JsonResponse
+from database.models import *
 
 
 def chat(request):
@@ -41,4 +43,17 @@ def respond_to_websockets(message):
         result_message['text'] = "I don't know any responses for that. If you're interested in yo mama jokes tell me fat, stupid or dumb."
 
     return result_message
+
+
+def update_joke_clicks(request):
+    category = request.GET['joke_type']
+    button, create = ButtonClick.objects.get_or_create(id == 1)
+    if category == 'Stupid':
+        button.Stupid += 1
+    elif category == 'Fat':
+        button.Fat += 1
+    else:
+        button.Dumb += 1
+    button.save()
+    return JsonResponse({'result': 'success'})
     

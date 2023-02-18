@@ -24,8 +24,7 @@ SECRET_KEY = 'r^3o#=8lu#*y66k7!a_4^82a#0n)kau%5!y2)!oxs40@tn@22-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -37,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',
-    'chatbot_tutorial'
+    'chatbot_tutorial',
+    'database'
 ]
 
 MIDDLEWARE = [
@@ -81,8 +81,12 @@ WSGI_APPLICATION = 'chatbot_tutorial.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'chat_bot',
+        'USER': 'postgres',
+        'PASSWORD': 'pg12345',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 
@@ -117,7 +121,6 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -125,6 +128,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(SITE_ROOT, "bot_static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'chatbot_tutorial/static'),
+]
+
 
 CHANNEL_LAYERS = {
     "default": {
@@ -132,3 +139,4 @@ CHANNEL_LAYERS = {
         "ROUTING": "chatbot_tutorial.routing.channel_routing",
     },
 }
+

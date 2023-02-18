@@ -25,8 +25,7 @@
 
         <div id="wrap" class="BotMainDiv" ng-controller="ChatCtrl">
             <!-- Begin page content -->
-            <div class="container-fluid" id="body-container" style="border-bottom: #eee 1px solid;">
-               
+                <div class="container-fluid" id="body-container" style="border-bottom: #eee 1px solid;"; > 
                 <div  id="sub-body-container">
                     
                     <div  id="messages-container">
@@ -37,26 +36,20 @@
                     
                 </div>
             </div>
-        
+    
             <div class="navbar navbar-default navbar-fixed-bottom non-error">
                 <div class="container-fluid botAccentColor" id="bottom-box">
-                    
-                    <div class="row" id="send-box">
-                        
-                        <div id="messageToSend" contenteditable="true" class="pull-left" data-ph="Type your message..."></div>
-                        
-
-                        <div class="pull-right send-button-div">
-                            <button  id="messageSendButton" type="button" onclick="sendTextMessage()">
-                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                            </button>  
+                    <div class="row justify-content-center align-items-center" id="send-box">
+                      <div class="col-12">
+                        <div class="d-flex justify-content-center align-items-center">
+                          <button class="btn btn-primary mx-2" onclick="sendJoke('stupid'); buttonClicked('Stupid');">Stupid</button>
+                          <button class="btn btn-primary mx-2" onclick="sendJoke('fat'); buttonClicked('Fat');">Fat</button>
+                          <button class="btn btn-primary mx-2" onclick="sendJoke('dumb'); buttonClicked('Dumb');">Dumb</button>
                         </div>
-
+                      </div>
                     </div>
-                    
-                </div>
-                    
-            </div>
+                  </div>
+              </div>
 
         </div>
         
@@ -107,6 +100,21 @@
                     }
             }
         });
+
+        function buttonClicked(type) {
+            $.ajax({
+                type: 'GET',
+                url: 'update_joke_clicks',
+                data: {
+                    'joke_type': type,
+                },
+                success: function(data) {
+                    // Display the joke returned by the server
+                    console.log(data.result)
+                    
+                }
+            });
+        }
 
         </script>
 
